@@ -1,5 +1,6 @@
 .Loader {
     display: inline-block;
+    margin: 10%;
     position: relative;
     width: 80px;
     height: 80px;
@@ -18,6 +19,8 @@
 }
 
 .center {
+    height: 100%;
+    vertical-align: center;
     text-align: center;
 }
 

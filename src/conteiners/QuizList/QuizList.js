@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom'
 import Loader from '../../components/UI/Loader/Loader'
 import {connect} from 'react-redux'
 import {fetchQuizes} from '../../store/actions/quiz';
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 
 class QuizList extends Component {
@@ -34,7 +35,11 @@ class QuizList extends Component {
 
                     {
                         this.props.loading && this.props.quizes.length !== 0
-                            ? <Loader />
+                            ?<React.Fragment>
+                                <Loader />
+                                <Backdrop/>
+                            </React.Fragment>
+
                             : <ul>
                                 { this.renderQuizes() }
                             </ul>

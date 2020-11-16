@@ -5,6 +5,7 @@ import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz'
 import Loader from '../../components/UI/Loader/Loader'
 import {connect} from 'react-redux'
 import {fetchQuizById, quizAnswerClick, retryQuiz} from "../../store/actions/quiz";
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 class Quiz extends Component {
 
@@ -24,7 +25,10 @@ class Quiz extends Component {
 
           {
             this.props.loading || !this.props.quiz
-             ? <Loader />
+             ? <React.Fragment>
+                  <Loader />
+                  <Backdrop/>
+                </React.Fragment>
              : this.props.isFinished
               ? <FinishedQuiz
                 results={this.props.results}

@@ -1,13 +1,7 @@
-import React from 'react' 
+import React from 'react'
 import classes from './Drower.module.css'
 import Backdrop from '../../UI//Backdrop/Backdrop'
 import {NavLink} from 'react-router-dom'
-
-const links = [
-    {to: '/', lable: 'Список', exect: true},
-    {to: '/auth', lable: 'Авторизация', exect: false},
-    {to: '/quiz-creator', lable: 'Создать тест', exect: false},
-]
 
 class Drower extends React.Component {
 
@@ -15,10 +9,10 @@ class Drower extends React.Component {
         this.props.onClose()
     }
 
-    renderLinks() {
+    renderLinks(links) {
         return links.map((link, index) => {
             return (
-                <li key={index}> 
+                <li key={index}>
                     <NavLink
                         to={link.to}
                         exact={link.exect}
@@ -39,15 +33,24 @@ class Drower extends React.Component {
             cls.push(classes.close)
         }
 
+        const links = [{to: '/', lable: 'Список', exect: true}]
+
+        if (this.props.isAuthenticated) {
+            links.push({to: '/quiz-creator', lable: 'Создать тест', exect: false})
+            links.push({to: '/logout', lable: 'Выйти', exect: false})
+        } else {
+            links.push({to: '/auth', lable: 'Авторизация', exect: false})
+        }
+
         return (
             <>
                 <nav className={cls.join(' ')}>
                     <ul>
-                        {this.renderLinks()}
+                        {this.renderLinks(links)}
                     </ul>
                 </nav>
-                {(this.props.isOpen) ? <Backdrop onClick={this.props.onClose} /> : null}
-                
+                {(this.props.isOpen) ? <Backdrop onClick={this.props.onClose}/> : null}
+
             </>
 
         )
